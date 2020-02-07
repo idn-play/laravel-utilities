@@ -1,0 +1,35 @@
+{
+    "name": "idn-play/laravel-utilities",
+    "license": "",
+    "description": "Laravel utilities",
+    "authors": [
+        {
+            "name": "IDN PLAY",
+            "email": "azam@idnplay.com"
+        }
+    ],
+    "type": "composer-plugin,library,utilities,helper,tools",
+    "minimum-stability": "dev",
+    "autoload": {
+        "files": [
+            "src/Helpers/autoload.php"
+        ],
+        "psr-4": {
+            "IdnPlay\\Laravel\\Utils\\": "src/"
+        }
+    },
+    "require": {
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "nesbot/carbon": "^2.16",
+        "illuminate/support": "^5.5 || ^6.0",
+        "illuminate/database": "^5.5 || ^6.0",
+        "illuminate/http": "^5.5 || ^6.0"
+    },
+    "extra": {
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "prefer-stable": true
+}
