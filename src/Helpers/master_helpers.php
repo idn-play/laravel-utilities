@@ -40,7 +40,7 @@ if ( ! function_exists('response_api'))
      * @param $code
      * @return JsonResponse
      */
-    function response_api($data = null,$code = null)
+    function response_api($data = null,$code = 200)
     {
         return Response::api($data,$code);
     }

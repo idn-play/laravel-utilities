@@ -11,12 +11,14 @@ namespace IdnPlay\Laravel\Utils\Library;
 
 class Response
 {
-    static function api($data = NULL, $http_code = NULL)
+    static function api($data = NULL, $http_code = 200)
     {
         $debug = request()->header('debug') ?? false;
 
         if ($http_code == 200 || $http_code == NULL)
         {
+            $http_code = 200;
+
             $data = is_array($data) || is_object($data) ? $data : array('message'=>$data);
 
             $response = [
