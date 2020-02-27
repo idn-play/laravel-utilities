@@ -8,7 +8,7 @@
             "email": "azam@idnplay.com"
         }
     ],
-    "type": "composer-plugin,library,utilities,helper,tools",
+    "type": "helper",
     "minimum-stability": "dev",
     "autoload": {
         "files": [
