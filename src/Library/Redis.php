@@ -18,22 +18,10 @@ class Redis
      *
      * @param $key
      * @param $value
+     * @param int $expire_in [second]
      * @return mixed
      */
-    public function set($key,$value)
-    {
-        return LibRedis::set($key,$value);
-    }
-
-    /**
-     * set redis data temporary and replace if exist old data
-     *
-     * @param $key
-     * @param $value
-     * @param $expire_in [second]
-     * @return mixed
-     */
-    public function set_tmp($key,$value,$expire_in)
+    public function set($key,$value,$expire_in = -1)
     {
         return LibRedis::set($key,$value,'EX',$expire_in);
     }
@@ -43,11 +31,12 @@ class Redis
      *
      * @param $key
      * @param $value
+     * @param int $expire_in [second]
      * @return mixed
      */
-    public function set_if_not_exist($key,$value)
+    public function set_if_not_exist($key,$value,$expire_in = -1)
     {
-        return LibRedis::setx($key,$value);
+        return LibRedis::setnx($key,$value,'EX',$expire_in);
     }
 
     /**
