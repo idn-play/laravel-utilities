@@ -23,7 +23,8 @@
         "nesbot/carbon": "^2.16",
         "illuminate/support": "^5.5 || ^6.0",
         "illuminate/database": "^5.5 || ^6.0",
-        "illuminate/http": "^5.5 || ^6.0"
+        "illuminate/http": "^5.5 || ^6.0",
+        "illuminate/redis": "^5.5 || ^6.0"
     },
     "extra": {
     },

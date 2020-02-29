@@ -21,9 +21,16 @@ class Redis
      * @param int $expire_in [second]
      * @return mixed
      */
-    public function set($key,$value,$expire_in = -1)
+    public function set($key,$value,$expire_in = null)
     {
-        return LibRedis::set($key,$value,'EX',$expire_in);
+        if (is_null($expire_in))
+        {
+            return LibRedis::set($key,$value);
+        }
+        else
+        {
+            return LibRedis::set($key,$value,'EX',$expire_in);
+        }
     }
 
     /**
@@ -34,9 +41,16 @@ class Redis
      * @param int $expire_in [second]
      * @return mixed
      */
-    public function set_if_not_exist($key,$value,$expire_in = -1)
+    public function set_if_not_exist($key,$value,$expire_in = null)
     {
-        return LibRedis::setnx($key,$value,'EX',$expire_in);
+        if (is_null($expire_in))
+        {
+            return LibRedis::setnx($key,$value);
+        }
+        else
+        {
+            return LibRedis::setnx($key,$value,'EX',$expire_in);
+        }
     }
 
     /**
