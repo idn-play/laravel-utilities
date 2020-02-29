@@ -49,7 +49,7 @@ class Redis
         }
         else
         {
-            return LibRedis::setnx($key,$value,'EX',$expire_in);
+            return LibRedis::set($key,$value,'EX',$expire_in, 'NX');
         }
     }
 
