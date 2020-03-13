@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Schema;
 
 trait Repository
 {
+    protected $db_connection;
+
     /**
      * manual load connection db
      *
@@ -24,7 +26,7 @@ trait Repository
      */
     public function connection($connection = 'default')
     {
-        $connection = $connection == 'default' ? Env::get('DB_CONNECTION') : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
 
         return DB::connection($connection);
     }
@@ -38,7 +40,7 @@ trait Repository
      */
     public function table($table_name,$connection = 'default')
     {
-        $connection = $connection == 'default' ? Env::get('DB_CONNECTION') : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
 
         return $this->connection($connection)->table($table_name);
     }
@@ -136,7 +138,7 @@ trait Repository
      */
     public function has_table($table_name,$connection = 'default')
     {
-        $connection = $connection == 'default' ? Env::get('DB_CONNECTION') : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
 
         return Schema::connection($connection)->hasTable($table_name);
     }
@@ -150,7 +152,7 @@ trait Repository
      */
     public function query($query,$connection = 'default')
     {
-        $connection = $connection == 'default' ? Env::get('DB_CONNECTION') : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
 
         return collect($this->connection($connection)->select($query));
     }
@@ -166,11 +168,14 @@ trait Repository
     /**
      * force group by statement
      *
+     * @param string $connection
      * @return bool
      */
-    public function mysql_force_group_by()
+    public function mysql_force_group_by($connection = 'default')
     {
-        return $this->connection()->unprepared('SET sql_mode=(SELECT REPLACE(@@sql_mode, \'ONLY_FULL_GROUP_BY\', \'\'));');
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
+
+        return $this->connection($connection)->unprepared('SET sql_mode=(SELECT REPLACE(@@sql_mode, \'ONLY_FULL_GROUP_BY\', \'\'));');
     }
 
     /**
