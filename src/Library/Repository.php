@@ -9,7 +9,7 @@
  **/
 namespace IdnPlay\Laravel\Utils\Library;
 
-class Repository
+abstract class Repository
 {
     use \IdnPlay\Laravel\Utils\Bus\Repository;
 }
