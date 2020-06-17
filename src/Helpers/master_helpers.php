@@ -10,24 +10,8 @@ use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Carbon\CarbonPeriod;
 use IdnPlay\Laravel\Utils\Library\Encryption\Aes;
-use IdnPlay\Laravel\Utils\Library\Repository;
 use IdnPlay\Laravel\Utils\Library\Response;
 use Illuminate\Http\JsonResponse;
-
-if ( ! function_exists('Repository'))
-{
-    /**
-     * aes encrypt
-     *
-     * for encrypt string
-     *
-     * @return Repository
-     */
-    function Repository()
-    {
-        return new Repository();
-    }
-}
 
 if ( ! function_exists('response_api'))
 {
