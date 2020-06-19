@@ -99,3 +99,32 @@ if ( ! function_exists('url_title'))
         return trim(trim($str, $separator));
     }
 }
+
+if ( ! function_exists('string_encode_url'))
+{
+    /**
+     * encode string url
+     *
+     * @param $string
+     * @return bool
+     */
+    function string_encode_url($string)
+    {
+        return rawurlencode(base64_encode(aes_encrypt($string)));
+    }
+}
+
+
+if ( ! function_exists('string_decode_url'))
+{
+    /**
+     * encode string url
+     *
+     * @param $string
+     * @return bool
+     */
+    function string_decode_url($string)
+    {
+        return aes_decrypt(base64_decode(rawurldecode($string)));
+    }
+}
