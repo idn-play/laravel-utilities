@@ -16,9 +16,7 @@ use Illuminate\Http\JsonResponse;
 if ( ! function_exists('response_api'))
 {
     /**
-     * aes encrypt
-     *
-     * for encrypt string
+     * helper for responing api
      *
      * @param $data
      * @param $code
@@ -27,6 +25,21 @@ if ( ! function_exists('response_api'))
     function response_api($data = null,$code = 200)
     {
         return Response::api($data,$code);
+    }
+}
+
+if ( ! function_exists('response_gzip'))
+{
+    /**
+     * helper for responing gzip
+     *
+     * @param $data
+     * @param $code
+     * @return JsonResponse
+     */
+    function response_gzip($data = null,$code = 200)
+    {
+        return Response::gzip($data,$code);
     }
 }
 
