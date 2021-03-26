@@ -24,7 +24,7 @@ if ( ! function_exists('response_api'))
      * @param $raw
      * @return JsonResponse
      */
-    function response_api($data = NULL, $http_code = 200, $gzip = false, $raw = false)
+    function response_api($data = NULL, $code = 200, $gzip = false, $raw = false)
     {
         return Response::api($data,$code,$gzip,$raw);
     }
@@ -40,7 +40,7 @@ if ( ! function_exists('response_gzip'))
      * @param $raw
      * @return JsonResponse
      */
-    function response_gzip($data = NULL, $http_code = 200, $raw = false)
+    function response_gzip($data = NULL, $code = 200, $raw = false)
     {
         return Response::gzip($data,$code,$raw);
     }
