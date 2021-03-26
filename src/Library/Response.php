@@ -11,7 +11,7 @@ namespace IdnPlay\Laravel\Utils\Library;
 
 class Response
 {
-    static function api($data = NULL, $http_code = 200, $gzip = false)
+    static function api($data = NULL, $http_code = 200, $gzip = false,$raw = false)
     {
         $debug = request()->header('debug') ?? false;
 
@@ -35,6 +35,11 @@ class Response
                 ];
             }
 
+            if(!!$raw)
+            {
+                $response = $data;
+            }
+
             if (!!$gzip)
             {
                 /*
@@ -43,7 +48,14 @@ class Response
                 $offset = 60 * 60;
                 $expire = "expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
 
-                $response = gzencode(json_encode($response),9);
+                if(is_array($response) || is_object($response))
+                {
+                    $response = gzencode(json_encode($response),9);
+                }
+                else
+                {
+                    $response = gzencode($response,9);   
+                }
 
                 return response($response)->setStatusCode($http_code != NULL ? $http_code : 200)->withHeaders([
                     'Access-Control-Allow-Origin' => '*',
@@ -78,6 +90,11 @@ class Response
                 ];
             }
 
+            if(!!$raw)
+            {
+                $response = $data;
+            }
+
             if (!!$gzip)
             {
                 /*
@@ -86,7 +103,14 @@ class Response
                 $offset = 60 * 60;
                 $expire = "expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
 
-                $response = gzencode(json_encode($response),9);
+                if(is_array($response) || is_object($response))
+                {
+                    $response = gzencode(json_encode($response),9);
+                }
+                else
+                {
+                    $response = gzencode($response,9);   
+                }
 
                 return response($response)->setStatusCode($http_code != NULL ? $http_code : 500)->withHeaders([
                     'Access-Control-Allow-Origin' => '*',
@@ -105,8 +129,8 @@ class Response
         }
     }
 
-    static function gzip($data = NULL, $http_code = 200)
+    static function gzip($data = NULL, $http_code = 200,$raw = false)
     {
-        return self::api($data, $http_code,true);
+        return self::api($data, $http_code,true,$raw);
     }
 }
