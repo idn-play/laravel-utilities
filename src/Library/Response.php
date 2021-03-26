@@ -11,7 +11,7 @@ namespace IdnPlay\Laravel\Utils\Library;
 
 class Response
 {
-    static function api($data = NULL, $http_code = 200)
+    static function api($data = NULL, $http_code = 200, $gzip = false)
     {
         $debug = request()->header('debug') ?? false;
 
