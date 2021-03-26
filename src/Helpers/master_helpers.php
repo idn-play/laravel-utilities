@@ -20,11 +20,13 @@ if ( ! function_exists('response_api'))
      *
      * @param $data
      * @param $code
+     * @param $gzip
+     * @param $raw
      * @return JsonResponse
      */
-    function response_api($data = null,$code = 200)
+    function response_api($data = NULL, $http_code = 200, $gzip = false, $raw = false)
     {
-        return Response::api($data,$code);
+        return Response::api($data,$code,$gzip,$raw);
     }
 }
 
@@ -35,11 +37,12 @@ if ( ! function_exists('response_gzip'))
      *
      * @param $data
      * @param $code
+     * @param $raw
      * @return JsonResponse
      */
-    function response_gzip($data = null,$code = 200)
+    function response_gzip($data = NULL, $http_code = 200, $raw = false)
     {
-        return Response::gzip($data,$code);
+        return Response::gzip($data,$code,$raw);
     }
 }
 
@@ -207,7 +210,7 @@ if ( ! function_exists('get_browser_data'))
             'version'   => $version,
             'platform'  => $platform,
             'pattern'    => $pattern,
-            'alias' 	=> strtolower(str_replace(' ', '-', $ub).'-'.$version.'-'.$platform)
+            'alias'     => strtolower(str_replace(' ', '-', $ub).'-'.$version.'-'.$platform)
         );
     }
 }
