@@ -21,12 +21,17 @@
     "require": {
         "mobiledetect/mobiledetectlib": "^2.8",
         "nesbot/carbon": "^2.16",
-        "illuminate/support": "^5.5 || ^6 || ^7 || ^8",
-        "illuminate/database": "^5.5 || ^6 || ^7 || ^8",
-        "illuminate/http": "^5.5 || ^6 || ^7 || ^8",
-        "illuminate/redis": "^5.5 || ^6 || ^7 || ^8"
+        "illuminate/support": "^6 || ^7 || ^8",
+        "illuminate/database": "^6 || ^7 || ^8",
+        "illuminate/http": "^6 || ^7 || ^8",
+        "illuminate/redis": "^6 || ^7 || ^8"
     },
     "extra": {
+        "laravel": {
+            "providers": [
+                "IdnPlay\\Laravel\\Utils\\Providers\\ServiceProvider"
+            ]
+        }
     },
     "config": {
         "preferred-install": "dist",

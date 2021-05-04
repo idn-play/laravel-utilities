@@ -55,13 +55,18 @@ if ( ! function_exists('aes_encrypt'))
      *
      * @param $str
      * @param bool $keyDefault
+     * @param null $key
      * @return string
      */
-    function aes_encrypt($str,$keyDefault = false)
+    function aes_encrypt($str,$keyDefault = false,$key = null)
     {
-        if (!$keyDefault)
+        if (!$keyDefault && !!is_null($key))
         {
-            Aes::setKey(env('ENCRYPT_KEY'));
+            Aes::setKey(config('idnplay.utilities.encrypt_key'));
+        }
+        else if (!$keyDefault && !is_null($key))
+        {
+            Aes::setKey($key);
         }
 
         return Aes::enkrip($str);
@@ -77,13 +82,18 @@ if ( ! function_exists('aes_decrypt'))
      *
      * @param $str
      * @param bool $keyDefault
+     * @param null $key
      * @return string
      */
-    function aes_decrypt($str,$keyDefault = false)
+    function aes_decrypt($str,$keyDefault = false,$key = null)
     {
-        if (!$keyDefault)
+        if (!$keyDefault && !!is_null($key))
         {
-            Aes::setKey(env('ENCRYPT_KEY'));
+            Aes::setKey(config('idnplay.utilities.encrypt_key'));
+        }
+        else if (!$keyDefault && !is_null($key))
+        {
+            Aes::setKey($key);
         }
 
         return Aes::dekrip($str);

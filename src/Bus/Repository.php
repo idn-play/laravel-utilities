@@ -10,7 +10,6 @@
 namespace IdnPlay\Laravel\Utils\Bus;
 
 use IdnPlay\Laravel\Utils\Library\Redis;
-use Illuminate\Support\Env;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -26,7 +25,7 @@ trait Repository
      */
     public function connection($connection = 'default')
     {
-        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : config('database.default')) : $connection;
 
         return DB::connection($connection);
     }
@@ -40,7 +39,7 @@ trait Repository
      */
     public function table($table_name,$connection = 'default')
     {
-        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : config('database.default')) : $connection;
 
         return $this->connection($connection)->table($table_name);
     }
@@ -138,7 +137,7 @@ trait Repository
      */
     public function has_table($table_name,$connection = 'default')
     {
-        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : config('database.default')) : $connection;
 
         return Schema::connection($connection)->hasTable($table_name);
     }
@@ -152,7 +151,7 @@ trait Repository
      */
     public function query($query,$connection = 'default')
     {
-        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : config('database.default')) : $connection;
 
         return collect($this->connection($connection)->select($query));
     }
@@ -173,7 +172,7 @@ trait Repository
      */
     public function mysql_force_group_by($connection = 'default')
     {
-        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : Env::get('DB_CONNECTION')) : $connection;
+        $connection = $connection == 'default' ? (!is_null($this->db_connection) ? $this->db_connection : config('database.default')) : $connection;
 
         return $this->connection($connection)->unprepared('SET sql_mode=(SELECT REPLACE(@@sql_mode, \'ONLY_FULL_GROUP_BY\', \'\'));');
     }
